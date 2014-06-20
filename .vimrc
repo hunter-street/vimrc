@@ -6,26 +6,29 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 " alternatively, pass a path where Vundle should install bundles
 "let path = '~/some/path/here'
 "call vundle#rc(path)
 
 " let Vundle manage Vundle, required
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-Bundle 'Yggdroot/vim-mark'
-Bundle 'scrooloose/nerdtree'
-Bundle 'majutsushi/tagbar'
-Bundle 'vim-scripts/QuickBuf.git'
-Bundle 'vim-scripts/TagHighlight'
+Plugin 'Yggdroot/vim-mark'
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/QuickBuf.git'
+Plugin 'vim-scripts/TagHighlight'
 
 " FuzzyFinder
-Bundle "L9"
-Bundle "FuzzyFinder"
+Plugin 'L9'
+Plugin 'FuzzyFinder'
 
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
 filetype plugin indent on     " required
+
 
 "" Plugins: mark, NERD_tree, taglist, TagHighlight, omni, (c, bufexplorer)
 "" tagbar, minibuffexpl, bclose.vim(self-copied)
