@@ -13,8 +13,9 @@ call vundle#begin()
 "call vundle#rc(path)
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/vundle'
 
+Plugin 'gmarik/vundle'
+Plugin 'rbgrouleff/bclose.vim'
 Plugin 'Yggdroot/vim-mark'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
@@ -197,7 +198,12 @@ let g:qb_hotkey = "<F7>"
 "------------------------------------
 "-----Kwbd-------------------------
 "------------------------------------
-nmap <C-K> : Kwbd<CR>
+"nmap <C-K> : Kwbd<CR>
+
+"------------------------------------
+"-----bclose-------------------------
+"------------------------------------
+nmap <C-K> : Bclose<CR>
 
 "-------------------------------
 "-------Useful commands---------
