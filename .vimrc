@@ -22,6 +22,7 @@ Plugin 'majutsushi/tagbar'
 "Plugin 'vim-scripts/QuickBuf.git' " Replaced by minibufexpl
 Plugin 'vim-scripts/TagHighlight'
 Plugin 'fholgado/minibufexpl.vim'
+Plugin 'vim-scripts/grep.vim'
 
 " FuzzyFinder
 Plugin 'L9'
@@ -94,8 +95,8 @@ noremap <A-v> "+p
 " ------------------------
 " --- Search ---
 " ------------------------
-map <F3> :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') <Bar> cw<CR>
-map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+"map <F4> :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') <Bar> cw<CR>
+"map <F3> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR> " Replaced by vim-grep
 
 " --- quickfix list launch files in new tab---
 set switchbuf+=usetab,newtab
@@ -205,6 +206,13 @@ nmap <F11> :UpdateTypesFile<CR>
 "-----bclose-------------------------
 "------------------------------------
 nmap <C-K> : Bclose<CR>
+
+"------------------------------------
+"-----grep-------------------------
+"------------------------------------
+let Grep_Skip_Dirs = '.git'
+let Grep_Skip_Files = '*.bak tags *.taghl'
+nnoremap <silent> <F3> :Rgrep<CR>
 
 "-------------------------------
 "-------Useful commands---------
