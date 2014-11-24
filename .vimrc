@@ -19,10 +19,10 @@ Plugin 'rbgrouleff/bclose.vim'
 Plugin 'Yggdroot/vim-mark'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
-"Plugin 'vim-scripts/QuickBuf.git' " Replaced by minibufexpl
 Plugin 'vim-scripts/TagHighlight'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'vim-scripts/grep.vim'
+Plugin 'vim-scripts/QuickBuf.git' " Replaced by minibufexpl
 
 " FuzzyFinder
 Plugin 'L9'
@@ -195,7 +195,7 @@ nmap <F11> :UpdateTypesFile<CR>
 "------------------------------------
 "----- qbuf -------------------
 "------------------------------------
-"let g:qb_hotkey = "<F7>"
+let g:qb_hotkey = "<F7>"
 
 "------------------------------------
 "-----Kwbd-------------------------
