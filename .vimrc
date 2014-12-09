@@ -77,8 +77,8 @@ set showmatch
 "autocmd BufRead,BufNewFile *.c,*.h,*.java set noic cin noexpandtab
 "autocmd BufRead,BufNewFile *.pl syntax on
  
- set expandtab
- set shiftwidth=2
+ "set expandtab
+ "set shiftwidth=2
 "set softtabstop=2
 "autocmd FileType make set noexpandtab "
 
@@ -165,6 +165,7 @@ nnoremap <F12> :call UpdateTags()
 "------------------------------------
 "---------Toggle Menu and Toolbar----
 "------------------------------------
+let g:tagbar_sort = 0
 set guioptions-=m
 set guioptions-=T
 map <silent> <F2> :if &guioptions =~# 'T' <Bar>
