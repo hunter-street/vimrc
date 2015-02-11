@@ -20,7 +20,7 @@ Plugin 'Yggdroot/vim-mark'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/TagHighlight'
-Plugin 'fholgado/minibufexpl.vim'
+Plugin 'techlivezheng/vim-plugin-minibufexpl'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'vim-scripts/QuickBuf.git' " Replaced by minibufexpl
 
@@ -36,7 +36,6 @@ filetype plugin indent on     " required
 "" Plugins: mark, NERD_tree, taglist, TagHighlight, omni, (c, bufexplorer)
 "" tagbar, minibuffexpl, bclose.vim(self-copied)
 "" Colors: bandit, eclipse, vylight
-
 " --- Generic---
 colorscheme eclipse
 syn on
@@ -44,7 +43,7 @@ set number
 set hlsearch
 set ignorecase
 set smartcase
-set cursorline
+"set cursorline
 
 " set UTF-8 encoding
   set enc=utf-8
