@@ -69,6 +69,8 @@ set showmatch
 " use intelligent indentation for C
  set smartindent
 " configure tabwidth and insert spaces instead of tabs
+"Expand tabs to spaces only in python files
+autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
 "set tabstop=4 " tab width is 4 spaces
 "set shiftwidth=4 " indent also with 4 spaces
 "set expandtab " expand tabs to spaces
