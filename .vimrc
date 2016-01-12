@@ -55,6 +55,7 @@ set smartcase
 " set guifont=Courier_New:h10:cANSI
 " For Linux
 set guifont=Courier\ 10\ Pitch\ 10
+" set guifont=Monospace\ 10
 
 " turn syntax highlighting on
  set t_Co=256
@@ -62,6 +63,7 @@ set guifont=Courier\ 10\ Pitch\ 10
 " colorscheme eclipse
 " highlight matching brace
 set showmatch
+set colorcolumn=80
 
 " --- Indentation ---
 " use indentation of previous line
@@ -131,7 +133,8 @@ map <A-]> :botright vsp<CR>:exec ("tag ".expand("<cword>")) <CR>
 
 " Synergy has problems on "]" "\"mapping
 nnoremap t g<C-]>
-map <F5> :botright vsp<CR>:exec ("tag ".expand("<cword>")) <CR>
+"map <F5> :botright vsp<CR>:exec ("tag ".expand("<cword>")) <CR>
+map <F5> :vsp<CR>:exec ("tag ".expand("<cword>")) <CR>
 map <F6> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 "-----------------------------------
@@ -215,6 +218,22 @@ nmap <C-K> : Bclose<CR>
 let Grep_Skip_Dirs = '.git'
 let Grep_Skip_Files = '*.bak tags *.taghl'
 nnoremap <silent> <F3> :Rgrep<CR>
+
+
+if has("gui_running")
+  " GUI is running or is about to start.
+  " Maximize gvim window
+  set lines=300 columns=200
+else
+  " This is console Vim.
+  if exists("+lines")
+    set lines=50
+  endif
+  if exists("+columns")
+    set columns=100
+  endif
+endif
+
 
 "-------------------------------
 "-------Useful commands---------
