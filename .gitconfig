@@ -1,0 +1,18 @@
+[user]
+	name = Dalong Zhang
+	email = dalong.zhang@outlook.com
+[color]
+	ui = auto
+[alias]
+	#graph = log --oneline --graph --decorate=full --date=relative 
+	graph = log --graph --decorate=short --date=short --pretty=format:'%C(auto)%h %C(auto)%d %C(auto)%ad %C(green)%an %Creset%C(auto)%s'
+[http]
+	cookiefile = /home/dalong/.gitcookies
+[diff]
+	tool = bc3
+[difftool]
+	bc3 = trustExitCode
+[merge]
+	tool = bc3
+[mergetool]
+	bc3 = trustExitCode
