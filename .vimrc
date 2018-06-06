@@ -1,28 +1,27 @@
-"
-" Vundle
-" https://github.com/gmarik/vundle
-"
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install bundles
-"let path = '~/some/path/here'
-"call vundle#rc(path)
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'Yggdroot/vim-mark'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
-Plugin 'vim-scripts/TagHighlight'
+Plugin 'abudden/taghighlight-automirror'
 Plugin 'techlivezheng/vim-plugin-minibufexpl'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'vim-scripts/QuickBuf.git' " Replaced by minibufexpl
+Plugin 'powerline/powerline'
 
 " FuzzyFinder
 Plugin 'L9'
@@ -31,7 +30,6 @@ Plugin 'FuzzyFinder'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on     " required
-
 
 "" Plugins: mark, NERD_tree, taglist, TagHighlight, omni, (c, bufexplorer)
 "" tagbar, minibuffexpl, bclose.vim(self-copied)
@@ -70,21 +68,29 @@ set colorcolumn=80
  set autoindent
 " use intelligent indentation for C
  set smartindent
-" configure tabwidth and insert spaces instead of tabs
-"Expand tabs to spaces only in python files
-autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
+
+set sw=4
+set expandtab
+set hid
+"set nohid
+
+" Turn off beep and flash
+set noeb vb t_vb=
+
+"---- configure tabwidth and insert spaces instead of tabs
 "set tabstop=4 " tab width is 4 spaces
 "set shiftwidth=4 " indent also with 4 spaces
 "set expandtab " expand tabs to spaces
+"Expand tabs to spaces only in python files
+autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
+autocmd BufNewFile,BufReadPost *.aidl,*.xml set filetype=java
+autocmd Filetype java setlocal expandtab tabstop=4 shiftwidth=4
+autocmd Filetype cpp setlocal expandtab tabstop=4 shiftwidth=4
+
 "Put autocmd commands based on the file suffix in your ~/.vimrc
 "autocmd BufRead,BufNewFile *.c,*.h,*.java set noic cin noexpandtab
 "autocmd BufRead,BufNewFile *.pl syntax on
- 
- "set expandtab
- "set shiftwidth=2
-"set softtabstop=2
-"autocmd FileType make set noexpandtab "
-
+autocmd FileType make set noexpandtab
 
 " intelligent comments
 set comments=sl:/*,mb:\ *,elx:\ */
@@ -100,16 +106,32 @@ noremap <A-v> "+p
 " ------------------------
 "map <F4> :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') <Bar> cw<CR>
 "map <F3> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR> " Replaced by vim-grep
+"------------------------------------
+"-----grep-------------------------
+"------------------------------------
+let Grep_Skip_Dirs = '.git'
+let Grep_Skip_Files = '*.bak tags *.taghl'
+nnoremap <silent> <F3> :Rgrep<CR>
+
+
+"------ miniBuf ----
+let g:miniBufExplVSplit = 20
+let g:miniBufExplAutoStart = 0
+nmap <C-D> : MBEToggle<CR>
+
+
+
+"---Powerline ---
+" Always show statusline
+set laststatus=2
+" Use 256 colours (Use this setting only if your terminal supports 256 colours)
+set t_Co=256
 
 " --- quickfix list launch files in new tab---
-set switchbuf+=usetab,newtab
+"set switchbuf+=usetab,newtab
 
-" Function: Remap keys to make it more similar to firefox tab functionality
-"--------------------
-"map <C-T> :tabnew<CR>
-"map <C-N> :!gvim -f &<CR><CR>
-"map <C-W> :confirm bdelete<CR>
 
+" ---- Close window
 nnoremap <C-Q> : q<CR>
 
 " --------------------------------------------------
@@ -120,7 +142,7 @@ let g:lasttab = 1
 nmap <C-tab> :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
-" Delete all trailing whitespace (at the end of each line) with
+" --- Delete all trailing whitespace (at the end of each line) with
 map <F10> :%s/\s\+$//
 
 " -------------------------------
@@ -160,11 +182,12 @@ endif
 
 "" Map F12 to update ctags
 function! UpdateTags()
-"execute ":!ctags -R --languages=C,C++ --c++-kinds=+p --fields=+iaS --extra=+q ./"
-  execute ":!ctags -R --languages=C,C++ --langmap=C:+.h --c++-kinds=+pxdt --fields=+iaS --extra=+qf ./"
+  execute ":!ctags -R  --exclude=.git --exclude=.repo --exclude=./out/ --exclude=*.fpp.c --exclude=*.a --exclude=./fingerprint_ta/secure/lib/* --languages=C,C++ --langmap=C:+.h --c++-kinds=+pxdt --fields=+iaS --extra=+qf ./"
   echohl StatusLine | echo "C/C++ tag updated" | echohl None
 endfunction
 nnoremap <F12> :call UpdateTags()
+
+"execute ":!ctags -R --languages=C,C++ --c++-kinds=+p --fields=+iaS --extra=+q ./"
 
 "------------------------------------
 "---------Toggle Menu and Toolbar----
@@ -189,8 +212,9 @@ nmap <F9> :let g:tagbar_left = 0<CR>:TagbarToggle<CR>
 "------------------------------------
 "-----NERDTree-------------------------
 "------------------------------------
-nmap <C-F> : NERDTree<CR>
-nmap <C-D> : NERDTreeClose<CR>
+nmap <C-F> : NERDTreeToggle<CR>
+" -----
+set wildchar=<Tab> wildmenu wildmode=full
 
 "------------------------------------
 "-----TagHighlight-------------------
@@ -212,13 +236,9 @@ let g:qb_hotkey = "<F7>"
 "------------------------------------
 nmap <C-K> : Bclose<CR>
 
-"------------------------------------
-"-----grep-------------------------
-"------------------------------------
-let Grep_Skip_Dirs = '.git'
-let Grep_Skip_Files = '*.bak tags *.taghl'
-nnoremap <silent> <F3> :Rgrep<CR>
-
+"-------------------------------
+"-------Useful commands---------
+"-------------------------------
 
 if has("gui_running")
   " GUI is running or is about to start.
@@ -227,17 +247,13 @@ if has("gui_running")
 else
   " This is console Vim.
   if exists("+lines")
-    set lines=50
+    "set lines=50
   endif
   if exists("+columns")
-    set columns=100
+    "set columns=100
   endif
 endif
 
-
-"-------------------------------
-"-------Useful commands---------
-"-------------------------------
 "--- Remove Windows line endings in VIM
 " :%s/\r//g or :set fileformat=unix
 " to check: set ff? ffs?
