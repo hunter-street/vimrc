@@ -69,8 +69,10 @@ set colorcolumn=80
 " use intelligent indentation for C
  set smartindent
 
-set sw=4
+set sw=2
 set expandtab
+autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+
 set hid
 "set nohid
 
