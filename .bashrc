@@ -56,12 +56,29 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# Find git-prompt.sh
+source ~/bin/git-prompt.sh
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[00m\]$(__git_ps1) \$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(__git_ps1) \$ '
 fi
-unset color_prompt force_color_prompt
+# THIS 8 LINES BELOWS IS ALTERNATIVE WAY OF SHOWING GIT BRANCH NAME
+#parse_git_branch() {
+# git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+#}
+#if [ "$color_prompt" = yes ]; then
+#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\] $(parse_git_branch)\[\033[00m\]\$ '
+#else
+#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ '
+#fi
+# THE SIX LINES BELOW are the default prompt and the unset (which were in the original .bashrc)
+#if [ "$color_prompt" = yes ]; then
+#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+#else
+#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+#fi
+#unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -116,4 +133,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+
+# 010 Editor
 PATH=$PATH:/home/dalong/010editor;export PATH; # ADDED BY INSTALLER - DO NOT EDIT OR DELETE THIS COMMENT - 87FF8EFC-483D-BCAA-D67D-735CF60410D1 1D4E29AD-EB92-4F8F-DAE9-A4A561F5E431
+# Conda
+source /home/dalong/anaconda3/etc/profile.d/conda.sh
