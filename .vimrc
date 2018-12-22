@@ -22,6 +22,7 @@ Plugin 'techlivezheng/vim-plugin-minibufexpl'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'vim-scripts/QuickBuf.git' " Replaced by minibufexpl
 Plugin 'powerline/powerline'
+Plugin 'nvie/vim-flake8'
 
 " FuzzyFinder
 Plugin 'L9'
@@ -226,7 +227,7 @@ nmap <F11> :UpdateTypesFile<CR>
 "------------------------------------
 "----- qbuf -------------------
 "------------------------------------
-let g:qb_hotkey = "<F7>"
+let g:qb_hotkey = "<F1>"
 
 "------------------------------------
 "-----Kwbd-------------------------
@@ -270,3 +271,7 @@ endif
 "
 "ctags --languages=C,C++ --langmap=C:+.h --c++-kinds=+pxdt --fields=+iaS --extra=+qf -L <file_list.txt>
 "In gvim: UpdateTypesFileOnly
+
+" Yank file name / path of current buffer in Vim
+" https://stackoverflow.com/questions/916875/yank-file-name-path-of-current-buffer-in-vim
+" 
