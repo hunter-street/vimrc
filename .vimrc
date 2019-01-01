@@ -35,7 +35,22 @@ filetype plugin indent on     " required
 "" Plugins: mark, NERD_tree, taglist, TagHighlight, omni, (c, bufexplorer)
 "" tagbar, minibuffexpl, bclose.vim(self-copied)
 "" Colors: bandit, eclipse, vylight
+
+" --- System ---
+if has('win32') || has('win64')
+    "set runtimepath=path/to/home.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,path/to/home.vim/after
+	let &runtimepath.=',$HOME/.vim'
+endif
+
+
 " --- Generic---
+"" Disable bell and flashing
+"" ref: http://vim.wikia.com/wiki/Disable_beeping
+set noerrorbells visualbell t_vb=
+if has('autocmd')
+  autocmd GUIEnter * set visualbell t_vb=
+endif
+
 colorscheme eclipse
 syn on
 set number
