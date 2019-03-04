@@ -23,6 +23,7 @@ Plugin 'vim-scripts/grep.vim'
 Plugin 'vim-scripts/QuickBuf.git' " Replaced by minibufexpl
 Plugin 'powerline/powerline'
 Plugin 'nvie/vim-flake8'
+Plugin 'editorconfig/editorconfig-vim'
 
 " FuzzyFinder
 Plugin 'L9'
@@ -68,7 +69,7 @@ set smartcase
 " For Win
 " set guifont=Courier_New:h10:cANSI
 " For Linux
-set guifont=Courier\ 10\ Pitch\ 10
+set guifont=Courier\ 10\ Pitch\ 11
 " set guifont=Monospace\ 10
 
 " turn syntax highlighting on
@@ -119,11 +120,7 @@ set comments=sl:/*,mb:\ *,elx:\ */
 vnoremap <A-c> "+y
 noremap <A-v> "+p
 
-" ------------------------
-" --- Search ---
-" ------------------------
-"map <F4> :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') <Bar> cw<CR>
-"map <F3> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR> " Replaced by vim-grep
+
 "------------------------------------
 "-----grep-------------------------
 "------------------------------------
@@ -253,6 +250,13 @@ let g:qb_hotkey = "<F1>"
 "-----bclose-------------------------
 "------------------------------------
 nmap <C-K> : Bclose<CR>
+
+
+"------------------------------------
+"-----editorconfig-------------------------
+"------------------------------------
+let g:EditorConfig_exec_path = '/usr/bin/editorconfig'
+
 
 "-------------------------------
 "-------Useful commands---------
