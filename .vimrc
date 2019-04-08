@@ -17,13 +17,13 @@ Plugin 'rbgrouleff/bclose.vim'
 Plugin 'Yggdroot/vim-mark'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
-Plugin 'abudden/taghighlight-automirror'
+"Plugin 'abudden/taghighlight-automirror'
+Plugin 'vim-scripts/TagHighlight'
 Plugin 'techlivezheng/vim-plugin-minibufexpl'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'vim-scripts/QuickBuf.git' " Replaced by minibufexpl
 Plugin 'powerline/powerline'
 Plugin 'nvie/vim-flake8'
-Plugin 'editorconfig/editorconfig-vim'
 
 " FuzzyFinder
 Plugin 'L9'
@@ -35,14 +35,35 @@ filetype plugin indent on     " required
 
 "" Plugins: mark, NERD_tree, taglist, TagHighlight, omni, (c, bufexplorer)
 "" tagbar, minibuffexpl, bclose.vim(self-copied)
-"" Colors: bandit, eclipse, vylight
 
 " --- System ---
 if has('win32') || has('win64')
     "set runtimepath=path/to/home.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,path/to/home.vim/after
 	let &runtimepath.=',$HOME/.vim'
+	set shell=cmd
+    set shellcmdflag =/c
+	set guifont=Courier_New:h10:cANSI
+else
+	set guifont=Courier\ 10\ Pitch\ 10
 endif
 
+if has("gui_running")
+  " GUI is running or is about to start.
+  " Maximize gvim window
+  set lines=300 columns=200
+  colorscheme eclipse
+  " turn syntax highlighting on
+  set t_Co=256
+  syntax on
+else
+  " This is console Vim.
+  if exists("+lines")
+    "set lines=50
+  endif
+  if exists("+columns")
+    "set columns=100
+  endif
+endif
 
 " --- Generic---
 "" Disable bell and flashing
@@ -52,7 +73,7 @@ if has('autocmd')
   autocmd GUIEnter * set visualbell t_vb=
 endif
 
-colorscheme eclipse
+
 syn on
 set number
 set hlsearch
@@ -69,13 +90,10 @@ set smartcase
 " For Win
 " set guifont=Courier_New:h10:cANSI
 " For Linux
-set guifont=Courier\ 10\ Pitch\ 11
+"set guifont=Courier\ 10\ Pitch\ 10
 " set guifont=Monospace\ 10
 
-" turn syntax highlighting on
- set t_Co=256
- syntax on
-" colorscheme eclipse
+
 " highlight matching brace
 set showmatch
 set colorcolumn=80
@@ -86,7 +104,7 @@ set colorcolumn=80
 " use intelligent indentation for C
  set smartindent
 
-set sw=2
+set sw=4
 set expandtab
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
 
@@ -114,13 +132,19 @@ autocmd FileType make set noexpandtab
 " intelligent comments
 set comments=sl:/*,mb:\ *,elx:\ */
 
+
+
 " ------------------------
 " --- Copy & Paste ---
 " ------------------------
 vnoremap <A-c> "+y
 noremap <A-v> "+p
 
-
+" ------------------------
+" --- Search ---
+" ------------------------
+"map <F4> :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') <Bar> cw<CR>
+"map <F3> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR> " Replaced by vim-grep
 "------------------------------------
 "-----grep-------------------------
 "------------------------------------
@@ -197,7 +221,7 @@ endif
 
 "" Map F12 to update ctags
 function! UpdateTags()
-  execute ":!ctags -R  --exclude=.git --exclude=.repo --exclude=./out/ --exclude=*.fpp.c --exclude=*.a --exclude=./fingerprint_ta/secure/lib/* --languages=C,C++ --langmap=C:+.h --c++-kinds=+pxdt --fields=+iaS --extra=+qf ./"
+  execute ":!ctags -R  --exclude=.git --exclude=.repo --exclude=./out/ --exclude=*.fpp.c --exclude=*.a --exclude=./fingerprint_ta/secure/lib/* --languages=C,C++ --langmap=C:+.h --c++-kinds=+pxdt --fields=+iaS --extra=+qf ."
   echohl StatusLine | echo "C/C++ tag updated" | echohl None
 endfunction
 nnoremap <F12> :call UpdateTags()
@@ -251,30 +275,10 @@ let g:qb_hotkey = "<F1>"
 "------------------------------------
 nmap <C-K> : Bclose<CR>
 
-
-"------------------------------------
-"-----editorconfig-------------------------
-"------------------------------------
-let g:EditorConfig_exec_path = '/usr/bin/editorconfig'
-
-
 "-------------------------------
 "-------Useful commands---------
 "-------------------------------
 
-if has("gui_running")
-  " GUI is running or is about to start.
-  " Maximize gvim window
-  set lines=300 columns=200
-else
-  " This is console Vim.
-  if exists("+lines")
-    "set lines=50
-  endif
-  if exists("+columns")
-    "set columns=100
-  endif
-endif
 
 "--- Remove Windows line endings in VIM
 " :%s/\r//g or :set fileformat=unix
@@ -293,4 +297,4 @@ endif
 
 " Yank file name / path of current buffer in Vim
 " https://stackoverflow.com/questions/916875/yank-file-name-path-of-current-buffer-in-vim
-" 
+"
